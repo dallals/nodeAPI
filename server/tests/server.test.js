@@ -98,6 +98,19 @@ describe('GET /todos/:id', () => {
 	});
 });
 
+describe('Delete /todos/:id', () => {
+	it('should delete todo by ID', (done) => {
+		var id = new ObjectID().toHexString();
+		request(app)
+			.delete(`/todos/${id}`)
+			.expect(200)
+			.expect((res) => {
+				expect(res.body.todo.text).toBe(todos[0].text)
+			})
+			.end(done);
+	});
+});
+
 
 
 
