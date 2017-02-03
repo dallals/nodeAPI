@@ -5,18 +5,20 @@ const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
 const {User} = require('./../models/user');
 
-const todos =[{
+const todos =[{ // seed data
 	text: 'First test todo'
 }, {
 	text: 'Second test todo'
 }];
 
 beforeEach((done) => {
-	Todo.remove({}).then(() => {
-		return Todo.insertMany(todos);
+	Todo.remove({}).then(() => { //deleting DB to make test pass with know data
+		return Todo.insertMany(todos); // adding const todos with seed data
 	}).then(() => done());
 });
 
+
+//test for added new todo
 describe('POST /todos', () => {
 	it('should create a new todo', (done) => {
 		var text = 'Test todo text';
@@ -57,6 +59,7 @@ describe('POST /todos', () => {
 	});
 });
 
+// test for get all todos
 describe('Get /todos', () => {
 	it('should get all todos', (done) => {
 		request(app)
